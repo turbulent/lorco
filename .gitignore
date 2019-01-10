@@ -92,5 +92,5 @@ typings/
 .next
 
 # Custom
-files/*
-generated/*
+files/*.sketch
+generated/*.scss
