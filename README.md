@@ -2,29 +2,37 @@
 
 # Lorco
 
-Lorco is a cli tool which extract colors from a sketch file and build a Sass, Less, Css, Json or JavaScript file with color variables.
+Lorco is a cli tool which extract colors from a sketch file and outputs color 
+variable files in many common formats including Sass, Less, CSS, JSON, JavaScript
 
-## Installation
+## Basic Usage
 
-## How to use
+1. Clone this repo
+2. Copy your file into `./files` folder
+3. Run `npm run build`
+4. Open `./generated/_colors.scss`
 
-- Clone this repo
-- Copy your file into `./files` folder
-- Run `npm run build`
-- Open `./generated/_colors.scss`
+## Options
 
-### File source
+You can change the behaviour of Lorco with several command line arguments.
 
-By default the script will take the first file he find (alphabetically).
-You can also specified which file you want to build with this command:
+### Change Source File
 
-- `npm run build -- --file=my-awesome-file.sketch`
+By default the script will take the first file it finds (alphabetically).
+You can also specify which file you would like to source from with this command:
 
-### Variables language
+`npm run build -- --file=my-awesome-file.sketch`
 
-By default script will build variables into a .scss file.
+### Change Output Language
+
+By default the script will build variables into a .scss file.
 You can also specified which language you want to build.
 
-- `npm run build -- lang=css`
+`npm run build -- lang=css`
 
-Available language are: Scss, Less, Css, Json, JS
+The available language values are: 
+- scss
+- less
+- css
+- json
+- js
