@@ -4,7 +4,8 @@
   "description": "Lorco is a cli tool for extract colors of a sketch file",
   "main": "index.js",
   "scripts": {
-    "build": "node ./index.js"
+    "build": "node ./index.js",
+    "test": "ava"
   },
   "keywords": [
     "sketch",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "@sindresorhus/slugify": "^0.8.0",
+    "ava": "^1.1.0",
     "camelcase": "^5.0.0",
     "minimist": "^1.2.0"
   }
