@@ -27,7 +27,7 @@ You can also specified which language you want to build.
 
 - `npm run build -- --lang=css`
 
-Available language are: Scss, Less, Css, Json, JS
+Available languages are: Scss, Less, Css, Json, JS
 
 We can also use both:
 
