@@ -29,6 +29,6 @@ You can also specified which language you want to build.
 
 Available languages are: Scss, Less, Css, Json, JS
 
-We can also use both:
+You can also use this in combination with the `file` argument.
 
 - `npm run build -- --file=my-awesome-file.sketch --lang=css`
