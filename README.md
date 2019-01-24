@@ -2,7 +2,7 @@
 
 # Lorco
 
-Lorco is a cli tool which extract colors from a sketch file and outputs color 
+Lorco is a cli tool which extract colors from a sketch file and outputs color
 variable files in many common formats including Sass, Less, CSS, JSON, JavaScript
 
 ## Basic Usage
@@ -30,9 +30,15 @@ You can also specified which language you want to build.
 
 `npm run build -- lang=css`
 
-The available language values are: 
+The available language values are:
 - scss
 - less
 - css
 - json
 - js
+
+## Tests
+
+Tests are in `test` directory, and are writter with [Ava](https://github.com/avajs/ava)
+
+Tests can be running with `npm run test`
