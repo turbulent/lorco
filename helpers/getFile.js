@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+const argv = require('minimist')(process.argv.slice(2));
 
 const getFile = () => {
+  const { file } = argv;
 
-  if (process.argv.length < 3) {
+  if (!file) {
     const [file] = fs.readdirSync('./files/')
       .filter((file) => {
         if (file && path.extname(file) === '.sketch') {
@@ -14,9 +16,7 @@ const getFile = () => {
     return file;
   }
 
-  const [_, __, file] = process.argv;
-
-  return file.replace('file=', '');
+  return file;
 }
 
 module.exports = getFile;

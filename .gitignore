@@ -93,4 +93,4 @@ typings/
 
 # Custom
 files/*.sketch
-generated/*.scss
+generated/*[.scss,.js,.json,.css,.less]

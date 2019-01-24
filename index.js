@@ -2,12 +2,13 @@ const ns = require('node-sketch');
 const path = require('path');
 
 const getFile = require('./helpers/getFile');
+const getLanguage = require('./helpers/getLanguage');
 const transformToRGBA = require('./helpers/transformToRGBA');
-const createScssVariable = require('./helpers/createScssVariable');
-const createScssFile = require('./helpers/createScssFile');
-const snakeCasedName = require('./helpers/snakeCasedName');
+const createVariable = require('./helpers/createVariable');
+const createFile = require('./helpers/createFile');
 
 const file = `${__dirname}/files/${getFile()}`
+const language = getLanguage();
 
 ns.read(file)
   .then(sketch => {
@@ -22,11 +23,11 @@ ns.read(file)
       const { color } = fill;
 
       const rgbacolor = transformToRGBA(color);
-      const name = snakeCasedName(symbol.name);
+      const name = symbol.name;
 
-      return createScssVariable(name, rgbacolor);
+      return createVariable(name, rgbacolor, language);
     });
 
-    createScssFile(`_${fileName}.scss`, colors);
+    createFile(`_${fileName}`, colors, language);
   })
   .catch((err) => new Error('Error: ', err));

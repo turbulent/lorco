@@ -1,6 +1,6 @@
 {
   "name": "lorco",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Lorco is a cli tool for extract colors of a sketch file",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,11 @@
   "author": "Anthony Guimard <bonjour@anthonyguimard.fr>",
   "license": "MIT",
   "dependencies": {
-    "@sindresorhus/slugify": "^0.8.0",
     "node-sketch": "^0.10.0"
+  },
+  "devDependencies": {
+    "@sindresorhus/slugify": "^0.8.0",
+    "camelcase": "^5.0.0",
+    "minimist": "^1.2.0"
   }
 }
