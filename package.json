@@ -14,6 +14,7 @@
   "author": "Anthony Guimard <bonjour@anthonyguimard.fr>",
   "license": "MIT",
   "dependencies": {
+    "@sindresorhus/slugify": "^0.8.0",
     "node-sketch": "^0.10.0"
   }
 }

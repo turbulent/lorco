@@ -1,4 +1,5 @@
 const ns = require('node-sketch');
+const path = require('path');
 
 const getFile = require('./helpers/getFile');
 const transformToRGBA = require('./helpers/transformToRGBA');
@@ -11,6 +12,7 @@ const file = `${__dirname}/files/${getFile()}`
 ns.read(file)
   .then(sketch => {
     const { symbols } = sketch;
+    const fileName = path.basename(file, '.sketch');
 
     const colors = symbols.map((symbol) => {
       const [layer, ...others] = symbol.layers;
@@ -25,6 +27,6 @@ ns.read(file)
       return createScssVariable(name, rgbacolor);
     });
 
-    createScssFile('_colors.scss', colors);
+    createScssFile(`_${fileName}.scss`, colors);
   })
   .catch((err) => new Error('Error: ', err));

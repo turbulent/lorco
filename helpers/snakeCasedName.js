@@ -1,13 +1,10 @@
+const slugify = require('@sindresorhus/slugify');
 const snakeCasedName = (name = null) => {
   if (!name) {
     return;
   }
 
-  return name
-    .toLowerCase()
-    .split('/')
-    .map(name => name.trim().replace(/\s+/g, '-'))
-    .join('-');
+  return slugify(name);
 }
 
 module.exports = snakeCasedName;

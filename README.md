@@ -4,8 +4,6 @@ Lorco is a cli tool which extract colors from a sketch file and generate a .scss
 
 ## Installation
 
-**requirements** Sketch should be installed on your computer
-
 ## How to use
 
 - Copy your file into `./files` folder
