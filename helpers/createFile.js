@@ -17,6 +17,7 @@ const formatCSS = (colors, file) => {
 };
 
 const createFile = (filename = '_colors', colors = [], extension = 'scss') => {
+
   const file = fs.createWriteStream(`./generated/${filename}.${extension}`);
 
   file.on('error', (err) => console.log('Error: ', err));

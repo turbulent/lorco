@@ -20,7 +20,7 @@ const getFile = () => {
     return null;
   }
 
-  return file;
+  return `${file}`;
 }
 
 module.exports = getFile;

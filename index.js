@@ -11,8 +11,8 @@ const getLanguage = require('./helpers/getLanguage');
 const file = getFile();
 const language = getLanguage();
 
-if (file && language) {
-  return lorco(file, language);
+if (file) {
+  return language ? lorco(file, language) : lorco(file);
 }
 
-return console.log('No file specified');
+return console.log(`No Sketch file specified or no Sketch file found in ./files directory`);
