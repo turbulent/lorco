@@ -13,7 +13,11 @@ const getFile = () => {
         }
       });
 
-    return `${appRoot}/files/${file}`;
+    if (file) {
+      return `${appRoot}/files/${file}`;
+    }
+
+    return null;
   }
 
   return file;

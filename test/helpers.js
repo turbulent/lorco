@@ -3,7 +3,7 @@ const test = require('ava');
 const createVariable = require('../helpers/createVariable');
 const transformToRGBA = require('../helpers/transformToRGBA');
 
-test('transformToRGBA should return rgba value from float color object', t => {
+test('transformToRGBA should return rgba value from float color object', async t => {
 
   const expectedColor = "rgba(244, 172, 183, 1)";
   const floatColor = {
@@ -19,7 +19,7 @@ test('transformToRGBA should return rgba value from float color object', t => {
 });
 
 
-test('Ensure createVariable return variable with name, color and syntax passed in parameters', t => {
+test('Ensure createVariable return variable with name, color and syntax passed in parameters', async t => {
 
   const variable = createVariable('variable example', "rgba(244, 172, 183, 1)", "scss");
 

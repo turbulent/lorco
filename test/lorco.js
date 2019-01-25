@@ -1,5 +1,5 @@
 const test = require('ava');
-const lorco = require('../index.js');
+const lorco = require('../src/lorco.js');
 
 test('Lorco should get 4 colors from sample file', async t => {
 
