@@ -1,13 +1,15 @@
 const ns = require('node-sketch');
 const path = require('path');
 
+global.appRoot = path.resolve(__dirname);
+
 const getFile = require('./helpers/getFile');
 const getLanguage = require('./helpers/getLanguage');
 const transformToRGBA = require('./helpers/transformToRGBA');
 const createVariable = require('./helpers/createVariable');
 const createFile = require('./helpers/createFile');
 
-const file = `${__dirname}/files/${getFile()}`
+const file = getFile();
 const language = getLanguage();
 
 const lorco = (file, language) => {

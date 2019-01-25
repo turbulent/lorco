@@ -13,7 +13,7 @@ const getFile = () => {
         }
       });
 
-    return file;
+    return `${appRoot}/files/${file}`;
   }
 
   return file;
