@@ -3,7 +3,7 @@ const fs = require('fs');
 const formatJSON = (colors, file) => {
   colors.forEach((color, index) => {
     if (index === 0) file.write('{\n');
-    file.write(color + '\n')
+    file.write(`  ${color}\n`);
     if (index === colors.length-1) file.write('}\n');
   });
 };
@@ -11,7 +11,7 @@ const formatJSON = (colors, file) => {
 const formatCSS = (colors, file) => {
   colors.forEach((color, index) => {
     if (index === 0) file.write(':root {\n');
-    file.write(color + '\n')
+    file.write(`  ${color}\n`);
     if (index === colors.length-1) file.write('}\n');
   });
 };
