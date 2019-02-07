@@ -4,7 +4,7 @@ const formatJSON = (colors, file) => {
   colors.forEach((color, index) => {
     if (index === 0) file.write('{\n');
     file.write(`  ${color}\n`);
-    if (index === colors.length-1) file.write('}\n');
+    if (index === colors.length - 1) file.write('}\n');
   });
 };
 
@@ -12,16 +12,17 @@ const formatCSS = (colors, file) => {
   colors.forEach((color, index) => {
     if (index === 0) file.write(':root {\n');
     file.write(`  ${color}\n`);
-    if (index === colors.length-1) file.write('}\n');
+    if (index === colors.length - 1) file.write('}\n');
   });
 };
 
 const createFile = (filename = '_colors', colors = [], extension = 'scss') => {
-
   const file = fs.createWriteStream(`./generated/${filename}.${extension}`);
 
-  file.on('error', (err) => console.log('Error: ', err));
+  // eslint-disable-next-line
+  file.on('error', err => console.log('Error: ', err));
   file.on('finish', () => {
+    // eslint-disable-next-line
     console.log(`${filename}.${extension} has been successfully created`);
   });
 
@@ -33,7 +34,7 @@ const createFile = (filename = '_colors', colors = [], extension = 'scss') => {
       formatCSS(colors, file);
       break;
     default:
-      colors.forEach((color) => file.write(color + '\n'));
+      colors.forEach(color => file.write(`${color}\n`));
       break;
   }
 

@@ -3,24 +3,26 @@ const path = require('path');
 const argv = require('minimist')(process.argv.slice(2));
 
 const getFile = () => {
-  const { file } = argv;
+  const { fileArg } = argv;
 
-  if (!file) {
+  if (!fileArg) {
     const [file] = fs.readdirSync('./files/')
-      .filter((file) => {
-        if (file && path.extname(file) === '.sketch') {
-          return file;
+      .filter((target) => {
+        if (target && path.extname(target) === '.sketch') {
+          return target;
         }
+
+        return null;
       });
 
     if (file) {
-      return `${appRoot}/files/${file}`;
+      return `${global.appRoot}/files/${file}`;
     }
 
     return null;
   }
 
-  return `${file}`;
-}
+  return `${fileArg}`;
+};
 
 module.exports = getFile;

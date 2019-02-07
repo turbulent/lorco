@@ -1,4 +1,3 @@
-const ns = require('node-sketch');
 const path = require('path');
 
 global.appRoot = path.resolve(__dirname);
@@ -11,8 +10,13 @@ const getLanguage = require('./helpers/getLanguage');
 const file = getFile();
 const language = getLanguage();
 
-if (file) {
-  return language ? lorco(file, language) : lorco(file);
-}
+const bootstrap = () => {
+  if (file) {
+    return language ? lorco(file, language) : lorco(file);
+  }
 
-return console.log(`No Sketch file specified or no Sketch file found in ./files directory`);
+  // eslint-disable-next-line
+  return console.log('No Sketch file specified or no Sketch file found in ./files directory');
+};
+
+bootstrap();
