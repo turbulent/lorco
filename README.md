@@ -1,5 +1,7 @@
 ![Lorco logo](docs/images/lorco-logo.png)
 
+[![CircleCI](https://circleci.com/gh/turbulent/lorco.svg?style=svg)](https://circleci.com/gh/turbulent/lorco)
+
 # Lorco
 
 Lorco is a cli tool which extract colors from a sketch file and outputs color
