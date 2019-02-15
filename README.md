@@ -48,3 +48,7 @@ You can also use this in combination with the `file` argument.
 Tests are in `test` directory, and are writter with [Ava](https://github.com/avajs/ava)
 
 Tests can be running with `npm run test`
+
+### Versioning
+
+We use [SemVer][semver] for versioning. For the versions available, see the [tags on this repository][project_tags].
