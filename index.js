@@ -1,33 +1,22 @@
-const ns = require('node-sketch');
 const path = require('path');
+
+global.appRoot = path.resolve(__dirname);
+
+const lorco = require('./src/lorco');
 
 const getFile = require('./helpers/getFile');
 const getLanguage = require('./helpers/getLanguage');
-const transformToRGBA = require('./helpers/transformToRGBA');
-const createVariable = require('./helpers/createVariable');
-const createFile = require('./helpers/createFile');
 
-const file = `${__dirname}/files/${getFile()}`
+const file = getFile();
 const language = getLanguage();
 
-ns.read(file)
-  .then(sketch => {
-    const { symbols } = sketch;
-    const fileName = path.basename(file, '.sketch');
+const bootstrap = () => {
+  if (file) {
+    return language ? lorco(file, language) : lorco(file);
+  }
 
-    const colors = symbols.map((symbol) => {
-      const [layer, ...others] = symbol.layers;
-      const style = layer.get('style').toJson();
-      const [fill] = style.fills;
+  // eslint-disable-next-line
+  return console.log('No Sketch file specified or no Sketch file found in ./files directory');
+};
 
-      const { color } = fill;
-
-      const rgbacolor = transformToRGBA(color);
-      const name = symbol.name;
-
-      return createVariable(name, rgbacolor, language);
-    });
-
-    createFile(`_${fileName}`, colors, language);
-  })
-  .catch((err) => new Error('Error: ', err));
+bootstrap();

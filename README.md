@@ -1,5 +1,7 @@
 ![Lorco logo](docs/images/lorco-logo.png)
 
+[![CircleCI](https://circleci.com/gh/turbulent/lorco.svg?style=svg)](https://circleci.com/gh/turbulent/lorco)
+
 # Lorco
 
 Lorco is a cli tool which extract colors from a sketch file and outputs color
@@ -28,7 +30,7 @@ You can also specify which file you would like to source from with this command:
 By default the script will build variables into a .scss file.
 You can also specified which language you want to build.
 
-`npm run build -- lang=css`
+- `npm run build -- --lang=css`
 
 The available language values are:
 - scss
@@ -36,6 +38,16 @@ The available language values are:
 - css
 - json
 - js
+
+You can also use this in combination with the `file` argument.
+
+- `npm run build -- --file=my-awesome-file.sketch --lang=css`
+
+## Tests
+
+Tests are in `test` directory, and are writter with [Ava](https://github.com/avajs/ava)
+
+Tests can be running with `npm run test`
 
 ### Versioning
 

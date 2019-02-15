@@ -4,7 +4,9 @@
   "description": "Lorco is a cli tool for extract colors of a sketch file",
   "main": "index.js",
   "scripts": {
-    "build": "node ./index.js"
+    "build": "node ./index.js",
+    "lint": "eslint index.js ./src ./helpers ./test --fix",
+    "test": "ava"
   },
   "keywords": [
     "sketch",
@@ -21,8 +23,9 @@
     "node-sketch": "^0.12.2"
   },
   "devDependencies": {
-    "@sindresorhus/slugify": "^0.8.0",
-    "camelcase": "^5.0.0",
-    "minimist": "^1.2.0"
+    "ava": "^1.1.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
   }
 }
