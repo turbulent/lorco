@@ -9,7 +9,7 @@ variable files in many common formats including Sass, Less, CSS, JSON, JavaScrip
 
 ## Basic Usage
 
-1. Clone this repo
+1. Clone this repo then `npm install` in the root folder
 2. Copy your file into `./files` folder
 3. Run `npm run build`
 4. Open `./generated/_colors.scss`
