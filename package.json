@@ -3,9 +3,12 @@
   "version": "0.0.2",
   "description": "Lorco is a cli tool for extract colors of a sketch file",
   "main": "index.js",
+  "bin": {
+    "lorco": "bin/cli.js"
+  },
   "scripts": {
     "build": "node ./index.js",
-    "lint": "eslint index.js ./src ./helpers ./test --fix",
+    "lint": "eslint index.js ./src ./helpers ./test ./bin --fix",
     "test": "ava"
   },
   "keywords": [
@@ -20,10 +23,11 @@
     "url": "https://github.com/turbulent/lorco.git"
   },
   "dependencies": {
-    "node-sketch": "^0.12.2",
     "@sindresorhus/slugify": "^0.8.0",
-    "minimist": "^1.2.0",
-    "camelcase": "^5.0.0"
+    "camelcase": "^5.0.0",
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "node-sketch": "^0.12.2"
   },
   "devDependencies": {
     "ava": "^1.1.0",

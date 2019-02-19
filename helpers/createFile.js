@@ -1,4 +1,8 @@
 const fs = require('fs');
+const chalk = require('chalk');
+
+const { log } = console;
+const success = chalk.bold.green;
 
 const formatJSON = (colors, file) => {
   colors.forEach((color, index) => {
@@ -17,13 +21,11 @@ const formatCSS = (colors, file) => {
 };
 
 const createFile = (filename = '_colors', colors = [], extension = 'scss') => {
-  const file = fs.createWriteStream(`./generated/${filename}.${extension}`);
+  const file = fs.createWriteStream(`./${filename}.${extension}`);
 
-  // eslint-disable-next-line
-  file.on('error', err => console.log('Error: ', err));
+  file.on('error', err => log('Error: ', err));
   file.on('finish', () => {
-    // eslint-disable-next-line
-    console.log(`${filename}.${extension} has been successfully created`);
+    log(`${success('[Success]')} ${filename}.${extension} has been successfully created`);
   });
 
   switch (extension) {
