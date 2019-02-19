@@ -11,11 +11,11 @@ const { log } = console;
 const error = chalk.bold.red;
 
 program
-  .usage('-s example.sketch -l css [-d example.css]')
+  .usage('-s example.sketch -l css [-d example.css, -c hex]')
   .option('-s, --source <sketch-file>', 'indicate the source sketch file.')
   .option('-l, --language <one of [css, js, json, scss, less]>', 'indicate the language you want to build, default: Scss.')
   .option('-d, --destination <destination-file>', 'indicate the destination of generated file.')
-  .option('-c, --color <one of [hex, rgba]>', 'indicate output color format, default: rgba.')
+  .option('-c, --color <one of [hex, rgb, rgba]>', 'indicate output color format, default: rgba.')
   .parse(process.argv);
 
 const logError = message => log(`${error('[error]')} ${message}`);
