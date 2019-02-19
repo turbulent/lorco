@@ -27,7 +27,8 @@
     "camelcase": "^5.0.0",
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
-    "node-sketch": "^0.12.2"
+    "node-sketch": "^0.12.2",
+    "rgb-hex": "^2.1.0"
   },
   "devDependencies": {
     "ava": "^1.1.0",

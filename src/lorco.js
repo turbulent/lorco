@@ -1,9 +1,9 @@
 const ns = require('node-sketch');
 
-const transformToRGBA = require('../helpers/transformToRGBA');
+const createColor = require('../helpers/createColor');
 const createVariable = require('../helpers/createVariable');
 
-const lorco = (file, language) => ns.read(file)
+const lorco = (file, language, colorOutput = 'rgba') => ns.read(file)
   .then((sketch) => {
     const { symbols } = sketch;
 
@@ -14,10 +14,11 @@ const lorco = (file, language) => ns.read(file)
 
       const { color } = fill;
 
-      const rgbacolor = transformToRGBA(color);
+      const extractedColor = createColor(color, colorOutput);
+
       const { name } = symbol;
 
-      return createVariable(name, rgbacolor, language);
+      return createVariable(name, extractedColor, language);
     });
 
     return colors;

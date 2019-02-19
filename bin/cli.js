@@ -13,13 +13,16 @@ const error = chalk.bold.red;
 program
   .usage('-s example.sketch -l css [-d example.css]')
   .option('-s, --source <sketch-file>', 'indicate the source sketch file.')
-  .option('-l, --language <target-language>', 'indicate the language you want to build.')
+  .option('-l, --language <one of [css, js, json, scss, less]>', 'indicate the language you want to build, default: Scss.')
   .option('-d, --destination <destination-file>', 'indicate the destination of generated file.')
+  .option('-c, --color <one of [hex, rgba]>', 'indicate output color format, default: rgba.')
   .parse(process.argv);
 
 const logError = message => log(`${error('[error]')} ${message}`);
 
-const bootstrap = async ({ source, language, destination }) => {
+const bootstrap = async ({
+  source, language, destination, color,
+}) => {
   if (!source) {
     return logError('You should specify a sketch file as source file.');
   }
@@ -28,7 +31,7 @@ const bootstrap = async ({ source, language, destination }) => {
     return logError('You should specify a language as build target.');
   }
 
-  const colors = await lorco(source, language);
+  const colors = await lorco(source, language, color);
 
   if (!destination) {
     return logColors(colors, language);
