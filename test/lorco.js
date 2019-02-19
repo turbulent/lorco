@@ -1,13 +1,13 @@
 const test = require('ava');
 const lorco = require('../src/lorco.js');
 
-test('Lorco should get 4 colors from sample file', async (t) => {
+test('Lorco should get 4 colors from symbols and 2 from palette of sample file', async (t) => {
   const colors = await lorco('test/sample.sketch');
 
-  t.is(colors.length, 4);
+  t.is(colors.length, 6);
 });
 
-test('Lorco should get 4 Scss colors from sample file', async (t) => {
+test('Lorco should get 4 Scss colors from symbols and 2 from palette from sample file', async (t) => {
   const colors = await lorco('test/sample.sketch');
 
   const colorsExpected = [
@@ -15,12 +15,14 @@ test('Lorco should get 4 Scss colors from sample file', async (t) => {
     '$mountbatten-pink: rgba(157, 129, 137, 1);',
     '$registration-black: rgba(0, 0, 0, 1);',
     '$gainsboro: rgba(206, 223, 217, 1);',
+    '$grey-of-sky: rgba(206, 223, 217, 1);',
+    '$green-highlands: rgba(32, 218, 152, 1);',
   ];
 
   t.deepEqual(colors, colorsExpected);
 });
 
-test('Lorco should get 4 Less colors from sample file', async (t) => {
+test('Lorco should get 4 Less colors from symbols and 2 from palette from sample file', async (t) => {
   const colors = await lorco('test/sample.sketch', 'less');
 
   const colorsExpected = [
@@ -28,12 +30,14 @@ test('Lorco should get 4 Less colors from sample file', async (t) => {
     '@mountbatten-pink: rgba(157, 129, 137, 1);',
     '@registration-black: rgba(0, 0, 0, 1);',
     '@gainsboro: rgba(206, 223, 217, 1);',
+    '@grey-of-sky: rgba(206, 223, 217, 1);',
+    '@green-highlands: rgba(32, 218, 152, 1);',
   ];
 
   t.deepEqual(colors, colorsExpected);
 });
 
-test('Lorco should get 4 Css colors from sample file', async (t) => {
+test('Lorco should get 4 Css colors from symbols and 2 from palette from sample file', async (t) => {
   const colors = await lorco('test/sample.sketch', 'css');
 
   const colorsExpected = [
@@ -41,12 +45,14 @@ test('Lorco should get 4 Css colors from sample file', async (t) => {
     '--mountbatten-pink: rgba(157, 129, 137, 1);',
     '--registration-black: rgba(0, 0, 0, 1);',
     '--gainsboro: rgba(206, 223, 217, 1);',
+    '--grey-of-sky: rgba(206, 223, 217, 1);',
+    '--green-highlands: rgba(32, 218, 152, 1);',
   ];
 
   t.deepEqual(colors, colorsExpected);
 });
 
-test('Lorco should get 4 JS colors from sample file', async (t) => {
+test('Lorco should get 4 Js colors from symbols and 2 from palette from sample file', async (t) => {
   const colors = await lorco('test/sample.sketch', 'js');
 
   const colorsExpected = [
@@ -54,12 +60,14 @@ test('Lorco should get 4 JS colors from sample file', async (t) => {
     'const mountbattenPink = "rgba(157, 129, 137, 1)";',
     'const registrationBlack = "rgba(0, 0, 0, 1)";',
     'const gainsboro = "rgba(206, 223, 217, 1)";',
+    'const greyOfSky = "rgba(206, 223, 217, 1)";',
+    'const greenHighlands = "rgba(32, 218, 152, 1)";',
   ];
 
   t.deepEqual(colors, colorsExpected);
 });
 
-test('Lorco should get 4 Json colors from sample file', async (t) => {
+test('Lorco should get 4 Json colors from symbols and 2 from palette from sample file', async (t) => {
   const colors = await lorco('test/sample.sketch', 'json');
 
   const colorsExpected = [
@@ -67,6 +75,8 @@ test('Lorco should get 4 Json colors from sample file', async (t) => {
     '"mountbattenPink": "rgba(157, 129, 137, 1)",',
     '"registrationBlack": "rgba(0, 0, 0, 1)",',
     '"gainsboro": "rgba(206, 223, 217, 1)",',
+    '"greyOfSky": "rgba(206, 223, 217, 1)",',
+    '"greenHighlands": "rgba(32, 218, 152, 1)",',
   ];
 
   t.deepEqual(colors, colorsExpected);
