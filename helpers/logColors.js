@@ -14,8 +14,6 @@ const formatJSON = (colors) => {
 };
 
 const formatCSS = (colors, extension) => {
-  successMessage(extension, colors.length);
-
   colors.forEach((color, index) => {
     if (index === 0) log(':root {');
     log(`  ${color}`);
