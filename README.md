@@ -4,8 +4,8 @@
 
 # Lorco
 
-Lorco is a cli tool which extract colors from a sketch file and outputs color
-variable files in many common formats including Sass, Less, CSS, JSON, JavaScript
+Lorco is a CLI tool which extract colors from a Sketch Library file
+to variables in many formats including Sass, Less, CSS, JSON, JavaScript.
 
 ## Basic Usage
 
