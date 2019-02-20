@@ -13,7 +13,7 @@ const formatJSON = (colors) => {
   });
 };
 
-const formatCSS = (colors, extension) => {
+const formatCSS = (colors) => {
   colors.forEach((color, index) => {
     if (index === 0) log(':root {');
     log(`  ${color}`);
