@@ -6,7 +6,7 @@ const formatter = require('../helpers/formatter');
 const { log } = console;
 const success = chalk.bold.green;
 
-const createFile = (filename = '_colors', colors = [], extension = 'scss') => {
+const createFile = (filename, colors, extension = 'scss') => {
   const fileExtension = path.extname(filename);
 
   const fileToCreate = fileExtension

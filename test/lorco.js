@@ -1,10 +1,15 @@
 const test = require('ava');
-const fs = require('fs');
 const lorco = require('../src/lorco.js');
 
-
-const createFile = require('../helpers/createFile');
-const formatter = require('../helpers/formatter');
+test('Lorco should failed if no file specified', async (t) => {
+  await t.throwsAsync(async () => {
+    await lorco('test/not-existing-file.sketch');
+  },
+  {
+    instanceOf: Error,
+    message: 'Error: ENOENT: no such file or directory, open \'test/not-existing-file.sketch\''
+  });
+});
 
 test('Lorco should get 4 colors from symbols and 2 from palette of sample file', async (t) => {
   const colors = await lorco('test/sample.sketch');
@@ -85,15 +90,4 @@ test('Lorco should get 4 Json colors from symbols and 2 from palette from sample
   ];
 
   t.deepEqual(colors, colorsExpected);
-});
-
-test('Lorco CLI should be able to generate a file with colors from sample file', async (t) => {
-  const colors = await lorco('test/sample.sketch', 'css');
-
-  createFile('./test/sample', colors, 'css');
-
-  const expectedColors = formatter(colors, 'css');
-  const generatedFile = fs.readFileSync('./test/sample.css', 'utf-8');
-  fs.unlinkSync('./test/sample.css');
-  t.is(generatedFile, expectedColors);
 });

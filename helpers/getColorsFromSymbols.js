@@ -1,8 +1,4 @@
-const getColorsFromSymbols = (symbols = null) => {
-  if (!symbols) {
-    return [];
-  }
-
+const getColorsFromSymbols = (symbols) => {
   return symbols.map((symbol) => {
     const [layer] = symbol.layers;
     const style = layer.get('style').toJson();

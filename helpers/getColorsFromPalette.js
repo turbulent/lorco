@@ -1,8 +1,4 @@
-const getColorsFromPalette = (palette = null) => {
-  if (!palette) {
-    return [];
-  }
-
+const getColorsFromPalette = (palette) => {
   // Get parents of first item in palette,
   // in order to get Name
   const { colorAssets } = palette.getParent().toJson();

@@ -5,8 +5,10 @@ const createVariable = require('../helpers/createVariable');
 const getColorsFromPalette = require('../helpers/getColorsFromPalette');
 const getColorsFromSymbols = require('../helpers/getColorsFromSymbols');
 
-const lorco = (file, language, colorOutput = 'rgba') => ns.read(file)
-  .then((sketch) => {
+const lorco = async (file, language, colorOutput = 'rgba') => {
+  try {
+    const sketch = await ns.read(file);
+
     const { symbols, colors } = sketch;
     const [palette] = colors;
 
@@ -19,7 +21,9 @@ const lorco = (file, language, colorOutput = 'rgba') => ns.read(file)
       const extractedColor = createColor(color, colorOutput);
       return createVariable(name, extractedColor, language);
     });
-  })
-  .catch(err => new Error('Error: ', err));
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 
 module.exports = lorco;
