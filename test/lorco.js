@@ -7,7 +7,7 @@ test('Lorco should failed if no file specified', async (t) => {
   },
   {
     instanceOf: Error,
-    message: 'Error: ENOENT: no such file or directory, open \'test/not-existing-file.sketch\''
+    message: 'Error: ENOENT: no such file or directory, open \'test/not-existing-file.sketch\'',
   });
 });
 

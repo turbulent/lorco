@@ -37,6 +37,6 @@ jobs:
       # run code-coverage!
       - run: npm run test:coverage
 
-      - store_artifacts:
-        path: coverage
-        prefix: coverage
+    - store_artifacts:
+      path: coverage
+      prefix: coverage

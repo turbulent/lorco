@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "node ./index.js",
-    "lint": "eslint index.js ./src ./helpers ./test ./bin --fix",
+    "lint": "eslint index.js ./src ./helpers ./test ./bin",
     "test": "ava",
     "test:coverage": "nyc --reporter=text-lcov ava"
   },
