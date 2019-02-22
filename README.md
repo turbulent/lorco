@@ -1,6 +1,6 @@
 ![Lorco logo](docs/images/lorco-logo.png)
 
-[![CircleCI](https://img.shields.io/circleci/project/github/turbulent/lorco/master.svg)](https://circleci.com/gh/turbulent/lorco)
+[![CircleCI](https://img.shields.io/circleci/project/github/turbulent/lorco/master.svg)](https://circleci.com/gh/turbulent/lorco) [![CodeClimate](https://img.shields.io/codeclimate/coverage/turbulent/lorco.svg)] [![CodeClimate](https://img.shields.io/codeclimate/maintainability/turbulent/lorco.svg)]
 
 
 # Lorco
