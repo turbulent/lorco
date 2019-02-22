@@ -14,6 +14,24 @@ jobs:
     steps:
       - checkout
 
+      - type: cache-restore
+        name: Restore Code Climate cache
+        key: v1-code-climate-0.1.4
+      - run:
+          name: Install Code Climate reporter
+          command: |
+            if [[ ! -x cc-test-reporter ]]
+            then
+              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.1.4-linux-amd64 > ./cc-test-reporter
+              chmod +x ./cc-test-reporter
+            fi
+
+      - type: cache-save
+        name: Save Code Climate cache
+        key: v1-code-climate-0.1.4
+        paths:
+          - ./cc-test-reporter
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -22,6 +40,12 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
+
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
 
       - save_cache:
           paths:
@@ -34,9 +58,13 @@ jobs:
       # run tests!
       - run: npm run test
 
-      # run code-coverage!
-      - run: npm run test:coverage
+      - run:
+          name: Run coverage
+          command: |
+            mkdir .nyc_output coverage
+            npm run test:coverage
 
-    - store_artifacts:
-      path: coverage
-      prefix: coverage
+      - run:
+          name: Report code coverage to Code Climate
+          command: |
+            ./cc-test-reporter after-build -t lcov --exit-code $? || true

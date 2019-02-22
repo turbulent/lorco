@@ -10,7 +10,7 @@
     "build": "node ./index.js",
     "lint": "eslint index.js ./src ./helpers ./test ./bin",
     "test": "ava",
-    "test:coverage": "nyc --reporter=text-lcov ava"
+    "test:coverage": "nyc report --reporter=lcov ava"
   },
   "keywords": [
     "sketch",
