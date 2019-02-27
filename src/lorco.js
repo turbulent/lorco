@@ -5,6 +5,15 @@ const createVariable = require('../helpers/createVariable');
 const getColorsFromPalette = require('../helpers/getColorsFromPalette');
 const getColorsFromSymbols = require('../helpers/getColorsFromSymbols');
 
+/**
+ * lorco - get colors from a Sketch file
+ *
+ * @param {string} file - Path to the Sketch file.
+ * @param {('scss' | 'css' | 'less' | 'js' | 'json')} [language=scss] - output target language
+ * @param {('rgba' | 'rgb' | 'hex')}  [colorOutput=rgba] - output color format
+ * @returns {Promise.<string[], Error>} A promise that returns an array of string
+ */
+
 const lorco = async (file, language, colorOutput = 'rgba') => {
   try {
     const sketch = await ns.read(file);

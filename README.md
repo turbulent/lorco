@@ -2,47 +2,70 @@
 
 [![CircleCI](https://img.shields.io/circleci/project/github/turbulent/lorco/master.svg)](https://circleci.com/gh/turbulent/lorco) [![CodeClimate](https://img.shields.io/codeclimate/coverage/turbulent/lorco.svg)] [![CodeClimate](https://img.shields.io/codeclimate/maintainability/turbulent/lorco.svg)]
 
-
 # Lorco
 
-Lorco is a CLI tool which extract colors from a Sketch Library file
-to variables in many formats including Sass, Less, CSS, JSON, JavaScript.
+Lorco is a CLI tool which extract colors from a Sketch Library file to variables in many formats including Sass, Less, CSS, JSON, JavaScript.
 
 ## Basic Usage
 
-1. Clone this repo then `npm install` in the root folder
-2. Copy your file into `./files` folder
-3. Run `npm run build`
-4. Open `./generated/_colors.scss`
+### As a library
 
-## Options
+1. `npm install --save lorco`
+
+```js
+const lorco = require('lorco');
+
+// Async/await
+const getColor = async () => {
+  const colors = await lorco('example.sketch', 'scss', 'hex');
+
+  return colors;
+};
+
+// Promise
+const colors = lorco('example.sketch', 'scss', 'hex')
+  .then((color) => colors);
+```
+
+### As a CLI
+
+1. `npm install -g lorco`
+2. `lorco -s example.sketch -l css [-d example.css, -c hex]`
+
+Or With [npx](https://www.npmjs.com/package/npx):
+
+- `npx lorco -s example.sketch -l css [-d example.css, -c hex]`
+
+## API
+
+### `lorco`
+
+`lorco` function takes three parameters:
+
+| param | type | default value | description |
+|-------|------|---------------|-------------|
+| file | string | - | Path to the Sketch file. |
+| language | 'scss' , 'css' , 'less' , 'js' , 'json' | 'scss' | output target language. |
+| colorOutput | 'rgba' , 'rgb' , 'hex' | rgba | output color format |
+
+## CLI Options
 
 You can change the behaviour of Lorco with several command line arguments.
 
-### Change Source File
+To get list of all available commands, run `lorco --help`
 
-By default the script will take the first file it finds (alphabetically).
-You can also specify which file you would like to source from with this command:
+```
+~> lorco --help
+Usage: lorco -s example.sketch -l css [-d example.css, -c hex]
 
-`npm run build -- --file=my-awesome-file.sketch`
+Options:
+  -s, --source <sketch-file>                           indicate the source sketch file.
+  -l, --language <one of [css, js, json, scss, less]>  indicate the language you want to build, default: Scss.
+  -d, --destination <destination-file>                 indicate the destination of generated file.
+  -c, --color <one of [hex, rgb, rgba]>                indicate output color format, default: rgba.
+  -h, --help                                           output usage information
 
-### Change Output Language
-
-By default the script will build variables into a .scss file.
-You can also specified which language you want to build.
-
-- `npm run build -- --lang=css`
-
-The available language values are:
-- scss
-- less
-- css
-- json
-- js
-
-You can also use this in combination with the `file` argument.
-
-- `npm run build -- --file=my-awesome-file.sketch --lang=css`
+```
 
 ## Tests
 
@@ -52,4 +75,4 @@ Tests can be running with `npm run test`
 
 ### Versioning
 
-We use [SemVer][semver] for versioning. For the versions available, see the [tags on this repository][project_tags].
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository][https://github.com/turbulent/lorco/releases].
