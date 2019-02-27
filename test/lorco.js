@@ -91,3 +91,15 @@ test('Lorco should get 4 Json colors from symbols and 2 from palette from sample
 
   t.deepEqual(colors, colorsExpected);
 });
+
+test('Lorco should not return error if no palette colors exist', async (t) => {
+  const colors = await lorco('test/sample-symbols.sketch', 'json');
+
+  t.is(colors.length, 4);
+});
+
+test('Lorco should not return error if no symbols colors exist', async (t) => {
+  const colors = await lorco('test/sample-palette.sketch', 'json');
+
+  t.is(colors.length, 3);
+});
