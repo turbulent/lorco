@@ -10,6 +10,7 @@ jobs:
       - image: circleci/node:10.15.0
     environment:
       CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
+
     working_directory: ~/repo
 
     steps:
@@ -68,3 +69,30 @@ jobs:
           name: Report code coverage to Code Climate
           command: |
             ./cc-test-reporter after-build -t lcov --debug --exit-code $? || true
+  deploy:
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Unpublish package
+          command: npm publish
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
