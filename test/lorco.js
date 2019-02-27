@@ -103,3 +103,10 @@ test('Lorco should not return error if no symbols colors exist', async (t) => {
 
   t.is(colors.length, 3);
 });
+
+test('Lorco should skip malformatted color symbol', async (t) => {
+  const colors = await lorco('test/sample-malformatted.sketch', 'json');
+
+  // Symbol which are not shape with fill colored are skipped
+  t.is(colors.length, 8);
+});

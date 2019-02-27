@@ -67,6 +67,12 @@ Options:
 
 ```
 
+## Sketch file structure
+
+Sketch Library file should be made of named symbols containing a shape fill with color.
+
+You can find [An example of file here](https://github.com/turbulent/lorco/blob/master/test/sample.sketch)
+
 ## Tests
 
 Tests are in `test` directory, and are writter with [Ava](https://github.com/avajs/ava)

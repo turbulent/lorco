@@ -24,7 +24,8 @@ const lorco = async (file, language, colorOutput = 'rgba') => {
     const symbolsColors = getColorsFromSymbols(symbols);
     const paletteColors = getColorsFromPalette(palette);
 
-    const colorsFromSketch = [...symbolsColors, ...paletteColors];
+    const colorsFromSketch = [...symbolsColors, ...paletteColors]
+      .filter(item => item && item.color && item.name);
 
     return colorsFromSketch.map(({ name, color }) => {
       const extractedColor = createColor(color, colorOutput);
