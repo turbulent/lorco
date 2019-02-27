@@ -3,16 +3,17 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.15.0
+  environment:
+    CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
+
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:10.15.0
-    environment:
-      CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
-
-    working_directory: ~/repo
-
+  test:
+    <<: *defaults
     steps:
       - checkout
 
@@ -70,6 +71,7 @@ jobs:
           command: |
             ./cc-test-reporter after-build -t lcov --debug --exit-code $? || true
   deploy:
+    <<: *defaults
     steps:
       - attach_workspace:
           at: ~/repo
