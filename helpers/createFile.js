@@ -1,44 +1,24 @@
+const path = require('path');
 const fs = require('fs');
+const chalk = require('chalk');
+const formatter = require('../helpers/formatter');
 
-const formatJSON = (colors, file) => {
-  colors.forEach((color, index) => {
-    if (index === 0) file.write('{\n');
-    file.write(`  ${color}\n`);
-    if (index === colors.length - 1) file.write('}\n');
-  });
-};
+const { log } = console;
+const success = chalk.bold.green;
 
-const formatCSS = (colors, file) => {
-  colors.forEach((color, index) => {
-    if (index === 0) file.write(':root {\n');
-    file.write(`  ${color}\n`);
-    if (index === colors.length - 1) file.write('}\n');
-  });
-};
+const createFile = (filename, colors, extension = 'scss') => {
+  const fileExtension = path.extname(filename);
 
-const createFile = (filename = '_colors', colors = [], extension = 'scss') => {
-  const file = fs.createWriteStream(`./generated/${filename}.${extension}`);
+  const fileToCreate = fileExtension
+    ? filename
+    : `${filename}.${extension}`;
 
-  // eslint-disable-next-line
-  file.on('error', err => console.log('Error: ', err));
-  file.on('finish', () => {
-    // eslint-disable-next-line
-    console.log(`${filename}.${extension} has been successfully created`);
-  });
+  fs.writeFileSync(
+    `./${fileToCreate}`,
+    formatter(colors, extension),
+  );
 
-  switch (extension) {
-    case 'json':
-      formatJSON(colors, file);
-      break;
-    case 'css':
-      formatCSS(colors, file);
-      break;
-    default:
-      colors.forEach(color => file.write(`${color}\n`));
-      break;
-  }
-
-  file.end();
+  log(`${success('[Success]')} ${fileToCreate} has been successfully created`);
 };
 
 module.exports = createFile;

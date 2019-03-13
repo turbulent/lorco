@@ -1,32 +1,39 @@
 const ns = require('node-sketch');
-const path = require('path');
 
-const transformToRGBA = require('../helpers/transformToRGBA');
+const createColor = require('../helpers/createColor');
 const createVariable = require('../helpers/createVariable');
-const createFile = require('../helpers/createFile');
+const getColorsFromPalette = require('../helpers/getColorsFromPalette');
+const getColorsFromSymbols = require('../helpers/getColorsFromSymbols');
 
-const lorco = (file, language) => ns.read(file)
-  .then((sketch) => {
-    const { symbols } = sketch;
-    const fileName = path.basename(file, '.sketch');
+/**
+ * lorco - get colors from a Sketch file
+ *
+ * @param {string} file - Path to the Sketch file.
+ * @param {('scss' | 'css' | 'less' | 'js' | 'json')} [language=scss] - output target language
+ * @param {('rgba' | 'rgb' | 'hex')}  [colorOutput=rgba] - output color format
+ * @returns {Promise.<string[], Error>} A promise that returns an array of string
+ */
 
-    const colors = symbols.map((symbol) => {
-      const [layer] = symbol.layers;
-      const style = layer.get('style').toJson();
-      const [fill] = style.fills;
+const lorco = async (file, language, colorOutput = 'rgba') => {
+  try {
+    const sketch = await ns.read(file);
 
-      const { color } = fill;
+    const { symbols, colors } = sketch;
+    const [palette] = colors;
 
-      const rgbacolor = transformToRGBA(color);
-      const { name } = symbol;
+    const symbolsColors = getColorsFromSymbols(symbols);
+    const paletteColors = getColorsFromPalette(palette);
 
-      return createVariable(name, rgbacolor, language);
+    const colorsFromSketch = [...symbolsColors, ...paletteColors]
+      .filter(item => item && item.color && item.name);
+
+    return colorsFromSketch.map(({ name, color }) => {
+      const extractedColor = createColor(color, colorOutput);
+      return createVariable(name, extractedColor, language);
     });
-
-    createFile(`_${fileName}`, colors, language);
-
-    return colors;
-  })
-  .catch(err => new Error('Error: ', err));
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 
 module.exports = lorco;

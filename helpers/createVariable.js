@@ -3,8 +3,6 @@ const slugify = require('@sindresorhus/slugify');
 
 const createVariable = (name, rgba, language = 'scss') => {
   switch (language) {
-    case 'scss':
-      return `$${slugify(name)}: ${rgba};`;
     case 'less':
       return `@${slugify(name)}: ${rgba};`;
     case 'css':

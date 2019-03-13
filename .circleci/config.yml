@@ -3,16 +3,37 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.15.0
+  environment:
+    CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
+
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:10.15.0
-
-    working_directory: ~/repo
-
+  test:
+    <<: *defaults
     steps:
       - checkout
+
+      - type: cache-restore
+        name: Restore Code Climate cache
+        key: v1-code-climate-0.1.4
+      - run:
+          name: Install Code Climate reporter
+          command: |
+            if [[ ! -x cc-test-reporter ]]
+            then
+              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.1.4-linux-amd64 > ./cc-test-reporter
+              chmod +x ./cc-test-reporter
+            fi
+
+      - type: cache-save
+        name: Save Code Climate cache
+        key: v1-code-climate-0.1.4
+        paths:
+          - ./cc-test-reporter
 
       # Download and cache dependencies
       - restore_cache:
@@ -22,6 +43,12 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
+
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
 
       - save_cache:
           paths:
@@ -33,3 +60,41 @@ jobs:
 
       # run tests!
       - run: npm run test
+
+      - run:
+          name: Run coverage
+          command: |
+            npm run test:coverage
+
+      - run:
+          name: Report code coverage to Code Climate
+          command: |
+            ./cc-test-reporter after-build -t lcov --debug --exit-code $? || true
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Unpublish package
+          command: npm publish
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

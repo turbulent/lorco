@@ -3,10 +3,14 @@
   "version": "0.0.2",
   "description": "Lorco is a cli tool for extract colors of a sketch file",
   "main": "index.js",
+  "bin": {
+    "lorco": "bin/cli.js"
+  },
   "scripts": {
     "build": "node ./index.js",
-    "lint": "eslint index.js ./src ./helpers ./test --fix",
-    "test": "ava"
+    "lint": "eslint index.js ./src ./helpers ./test ./bin",
+    "test": "nyc ava",
+    "test:coverage": "nyc report --reporter=lcov ava"
   },
   "keywords": [
     "sketch",
@@ -19,16 +23,26 @@
     "type": "git",
     "url": "https://github.com/turbulent/lorco.git"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
+  },
   "dependencies": {
-    "node-sketch": "^0.12.2",
     "@sindresorhus/slugify": "^0.8.0",
-    "minimist": "^1.2.0",
-    "camelcase": "^5.0.0"
+    "camelcase": "^5.0.0",
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "node-sketch": "^0.12.2",
+    "rgb-hex": "^2.1.0"
   },
   "devDependencies": {
     "ava": "^1.1.0",
     "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.16.0",
+    "husky": "^1.3.1",
+    "nyc": "^13.3.0"
   }
 }
