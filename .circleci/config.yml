@@ -67,7 +67,7 @@ jobs:
       - run:
           name: Report code coverage to Code Climate
           command: |
-            ./cc-test-reporter after-build -t lcov --debug --exit-code $? || true
+            ./cc-test-reporter after-build -t lcov --exit-code $? || true
   deploy:
     <<: *defaults
     steps:
