@@ -1,6 +1,6 @@
 ![Lorco logo](docs/images/lorco-logo.png)
 
-[![CircleCI](https://img.shields.io/circleci/project/github/turbulent/lorco/master.svg)](https://circleci.com/gh/turbulent/lorco) [![CodeClimate](https://img.shields.io/codeclimate/coverage/turbulent/lorco.svg)] [![CodeClimate](https://img.shields.io/codeclimate/maintainability/turbulent/lorco.svg)]
+[![CircleCI](https://img.shields.io/circleci/project/github/turbulent/lorco/master.svg)](https://circleci.com/gh/turbulent/lorco) [![Test Coverage](https://api.codeclimate.com/v1/badges/107b5f879f6a75641f43/test_coverage)](https://codeclimate.com/github/turbulent/lorco/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/107b5f879f6a75641f43/maintainability)](https://codeclimate.com/github/turbulent/lorco/maintainability)
 
 # Lorco
 
